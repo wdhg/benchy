@@ -1,6 +1,6 @@
+{-# LANGUAGE BangPatterns #-}
 module Benchy where
 
-import Control.DeepSeq
 import Data.Time.Clock.POSIX
 
 data Benchmark
@@ -16,9 +16,10 @@ instance Show Benchmark where
     ++ "\nTIME TAKEN: "
     ++ (show $ end - start)
 
-bench :: NFData a => a -> IO Benchmark
+bench :: a -> IO Benchmark
 bench value
   = do
-    start <- getPOSIXTime
-    end   <- value `deepseq` getPOSIXTime
+    !start <- getPOSIXTime
+    let !_ = value
+    !end   <- getPOSIXTime
     return $ Benchmark start end
