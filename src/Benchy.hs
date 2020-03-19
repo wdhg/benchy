@@ -28,10 +28,10 @@ timeTaken (BenchmarkN benchmarks)
         = map timeTaken benchmarks
 
 bench :: a -> IO Benchmark
-bench value
+bench action
   = do
     !start <- getPOSIXTime
-    let !_ = value
+    let !_ = action
     !end   <- getPOSIXTime
     return $ Benchmark start end
 
