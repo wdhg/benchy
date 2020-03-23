@@ -30,9 +30,9 @@ timeTaken (BenchmarkN benchmarks)
 bench :: a -> IO Benchmark
 bench action
   = do
-    !start <- getPOSIXTime
+    start  <- getPOSIXTime
     let !_ = action
-    !end   <- getPOSIXTime
+    end    <- getPOSIXTime
     return $ Benchmark start end
 
 benchN :: Int -> a -> IO Benchmark
