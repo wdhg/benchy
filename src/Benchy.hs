@@ -36,5 +36,5 @@ bench action
     return $ Benchmark start end
 
 benchN :: Int -> a -> IO Benchmark
-benchN n value
-  = BenchmarkN <$> (mapM bench $ replicate n value)
+benchN count action
+  = BenchmarkN <$> (mapM bench $ replicate count action)
